@@ -9,6 +9,7 @@
 <input type="text" name="content" id="content_msg" value="${message.content }"/>
 <br/><br/>
 <c:out value="${_token }"></c:out>
+<p><%= request.getSession().getId() %></p>
 
 <input type="hidden" name="_token" value="${_token }">
 <button type="submit">投稿</button>
