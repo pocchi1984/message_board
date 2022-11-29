@@ -6,15 +6,21 @@
         <h2>メッセージ一覧</h2>
         <ul>
             <c:forEach var="message" items="${messages }">
+                <p>
+                    <c:out value="${message.id }"></c:out>
+                </p>
+                <c:out value="${message }"></c:out>
+
                 <li><a
-                    href="${pageContext.request.contextPath}/show?id=${message.id }">
+                    href="${pageContext.request.contextPath/show?id=${message.id }">
                         <c:out value="${message.id }"></c:out>
-                </a> ：<c:out value="${message.title}"></c:out> &gt;<c:out
-                        value="${message.content }"></c:out></li>
+                </a> ：<c:out value="${message.title }"></c:out>&gt;<c:out
+                        value="${message.content}"></c:out></li>
             </c:forEach>
         </ul>
         <p>
-            <a href="${pageContext.request.contextPath }/new">新規メッセージ</a>
+            <a href="${pageContext.request.contextPath }/new">新規メッセージの投稿</a>
         </p>
     </c:param>
 </c:import>
+

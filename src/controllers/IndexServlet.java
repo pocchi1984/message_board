@@ -33,16 +33,25 @@ public class IndexServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
 
-        EntityManager em =DBUtil.createEntityManager();
+        System.out.println("indexservlet1");
+
+        EntityManager em = DBUtil.createEntityManager();
+
+        System.out.println("indexservlet2");
 
         List<Message> messages = em.createNamedQuery("getAllMessages",Message.class).getResultList();
+
+        System.out.println("indexservlet3");
+
+        System.out.println(messages);
 
         em.close();
 
         request.setAttribute("messages", messages);
 
-        RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/messages/index.jsp");
+        RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/messages/index.jsp");
         rd.forward(request, response);
 
     }
