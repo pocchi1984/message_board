@@ -35,13 +35,27 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
 
+        int page=1;
+        try {
+             page = Integer.parseInt(request.getParameter("page"));
+        } catch (NumberFormatException e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        }
+
         System.out.println("indexservlet1");
 
         EntityManager em = DBUtil.createEntityManager();
 
         System.out.println("indexservlet2");
 
-        List<Message> messages = em.createNamedQuery("getAllMessages",Message.class).getResultList();
+        List<Message> messages = em.createNamedQuery("getAllMessages",Message.class)
+                .setFirstResult(15 * (page-1))
+                .setMaxResults(15)
+                .getResultList();
+
+        //全件数を取得
+        long messages_count =(long)em.createNamedQuery("getMessagesCount",Long.class).getSingleResult();
 
         System.out.println("indexservlet3");
 
@@ -50,6 +64,8 @@ public class IndexServlet extends HttpServlet {
         em.close();
 
         request.setAttribute("messages", messages);
+        request.setAttribute("messages_count", messages_count);
+        request.setAttribute("page", page);
 
 
         if(request.getSession().getAttribute("flush")!=null) {

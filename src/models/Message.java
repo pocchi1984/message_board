@@ -13,31 +13,36 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(
-            name="getAllMessages",
-            query="select m from Message as m order by m.id desc"
-            )
-})
+        @NamedQuery(name = "getAllMessages", query = "select m from Message as m order by m.id desc"
 
-@Table(name ="messages")
+        ),
+        @NamedQuery(name = "getMessagesCount", query = "select count(m) from Message as m"
+
+        )
+
+}
+
+)
+
+@Table(name = "messages")
 
 public class Message {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="title",length=255,nullable=false)
+    @Column(name = "title", length = 255, nullable = false)
     private String title;
 
-    @Column(name="content",length=255,nullable=false)
+    @Column(name = "content", length = 255, nullable = false)
     private String content;
 
-    @Column(name="created_ad",nullable=false)
+    @Column(name = "created_ad", nullable = false)
     private Timestamp created_at;
 
-    @Column(name="update_at",nullable=false)
+    @Column(name = "update_at", nullable = false)
     private Timestamp update_at;
 
     public Integer getId() {
@@ -79,6 +84,5 @@ public class Message {
     public void setUpdate_at(Timestamp update_at) {
         this.update_at = update_at;
     }
-
 
 }
